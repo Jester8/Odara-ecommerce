@@ -30,42 +30,44 @@ const Topbar = () => {
   return (
     <div className="bg-white text-black px-4 py-2 flex flex-col sm:flex-row items-center justify-between font-slab relative">
       {/* Desktop/Laptop Navigation */}
-      <div className="hidden md:flex items-center justify-between w-full">
+      <div className="hidden md:flex items-center justify-between w-full max-w-screen-2xl mx-auto">
         {/* ODARA Logo */}
-        <div className="text-2xl font-bold">ODARA</div>
+        <div className="text-2xl font-bold min-w-max mr-4">ODARA</div>
 
-        <div className="flex items-center gap-4">
-          {/* Search Input */}
-          <div className="relative w-[1000px] ml-[190px]">
-            <input
-              type="search"
-              className="w-full rounded-md border border-solid border-gray-400 bg-white px-4 py-2 pr-10 text-base font-normal text-black placeholder:text-gray-500 placeholder:text-sm outline-none focus:ring-0 focus:border-gray-400"
-              placeholder="Search for any products"
-            />
-            <div className="absolute inset-y-0 right-3 flex items-center text-gray-500">
-              <Search className="text-gray-800" />
+        <div className="flex items-center w-full space-x-4">
+          {/* Search Input Container */}
+          <div className="flex-grow flex items-center space-x-2 max-w-[800px] mx-auto">
+            <div className="relative w-full">
+              <input
+                type="search"
+                className="w-full rounded-md border border-solid border-gray-400 bg-white px-4 py-2 pr-10 text-base font-normal text-black placeholder:text-gray-500 placeholder:text-sm outline-none focus:ring-0 focus:border-gray-400"
+                placeholder="Search for any products"
+              />
+              <div className="absolute inset-y-0 right-3 flex items-center text-gray-500">
+                <Search className="text-gray-800" />
+              </div>
             </div>
+
+            <button
+              className="min-w-max bg-emerald-600 text-white rounded-md px-4 py-2 shadow-lg text-md font-medium transition duration-150 ease-in-out focus:outline-none"
+              type="button"
+            >
+              SEARCH
+            </button>
           </div>
 
-          <button
-            className="bg-emerald-600 text-white rounded-md px-4 py-2 shadow-lg text-md font-medium transition duration-150 ease-in-out focus:outline-none"
-            type="button"
-          >
-            SEARCH
-          </button>
-
           {/* Right Side Actions */}
-          <div className="flex items-center gap-4">
+          <div className="flex items-center space-x-4 lg:space-x-4 md:space-x-2">
             {/* Sign In/Up Section */}
             <div
-              className="relative flex items-center gap-2"
+              className="relative flex items-center space-x-2 md:space-x-0"
               onMouseEnter={() => setAuthCardVisible(true)}
               onMouseLeave={() => setAuthCardVisible(false)}
             >
               <IconButton aria-label="sign in/signup" className="text-gray-900">
                 <PersonOutline className="text-black" fontSize="large" />
               </IconButton>
-              <div className="flex flex-col items-start cursor-pointer">
+              <div className="hidden lg:flex flex-col items-start cursor-pointer">
                 <span className="text-xs text-gray-600">Welcome</span>
                 <span className="text-sm text-gray-800 font-bold">Sign in/Sign up</span>
               </div>
@@ -79,18 +81,18 @@ const Topbar = () => {
             </div>
 
             {/* Cart Section */}
-            <div className="flex items-center gap-2">
+            <div className="flex items-center space-x-2 md:space-x-0">
               <IconButton aria-label="cart" className="text-black">
                 <ShoppingCartOutlined className="text-black" fontSize="large" />
               </IconButton>
-              <div className="flex flex-col items-start">
+              <div className="hidden lg:flex flex-col items-start">
                 <span className="text-xs text-white w-7 text-center rounded-full bg-black">0</span>
                 <span className="text-sm text-gray-800 cursor-pointer font-bold">Cart</span>
               </div>
             </div>
 
             {/* Language Selector */}
-            <div className="relative flex items-center">
+            <div className="relative flex items-center md:hidden lg:flex">
               <img
                 src={languages.find((lang) => lang.code === language)?.flag}
                 alt="Selected language flag"
@@ -112,7 +114,7 @@ const Topbar = () => {
             {/* Dark Mode Toggle */}
             <button
               onClick={toggleDarkMode}
-              className="ml-2 p-2 rounded-full bg-emerald-500 text-white hover:bg-emerald-600 transition-colors duration-300 ease-in-out"
+              className="p-2 rounded-full bg-emerald-500 text-white hover:bg-emerald-600 transition-colors duration-300 ease-in-out"
             >
               {darkMode ? <SunIcon size={20} /> : <MoonIcon size={20} />}
             </button>
@@ -120,7 +122,7 @@ const Topbar = () => {
         </div>
       </div>
 
-      {/* Mobile Navigation */}
+      {/* Mobile Navigation (Unchanged) */}
       <div className="md:hidden w-full">
         <div className="flex justify-between items-center mb-4 w-full">
           <div className="text-1xl font-bold">ODARA</div>
