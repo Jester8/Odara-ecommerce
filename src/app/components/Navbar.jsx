@@ -21,7 +21,7 @@ const Navbar = () => {
       <div className="container mx-auto mr-9 px-4 py-3 flex items-center justify-between">
         {/* Categories Dropdown */}
         <div className="relative flex items-center space-x-4">
-          <button 
+          {/* <button 
             onClick={() => setIsDropdownOpen(!isDropdownOpen)}
             className="flex items-center bg-gray-200 text-black px-4 py-2 rounded-full w-50 hover:bg-gray-300 transition duration-300 
             max-[430px]:hidden"
@@ -44,7 +44,7 @@ const Navbar = () => {
                 ))}
               </ul>
             </div>
-          )}
+          )} */}
 
           {/* Navigation Links */}
           <div className="hidden md:flex space-x-6 
