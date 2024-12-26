@@ -94,7 +94,6 @@ const Carousel = ({ products = [] }) => {
               index === currentIndex ? "opacity-100" : "opacity-0"
             }`}
           >
-            {/* Product Image with Loading State */}
             <div className="relative w-full h-full">
               {!imageLoaded && (
                 <div className="absolute inset-0 bg-gray-200 flex items-center justify-center">
@@ -132,4 +131,13 @@ const Carousel = ({ products = [] }) => {
   );
 };
 
-export default Carousel;
+// Example usage with Picsum images
+const exampleProducts = Array.from({ length: 10 }, (_, id) => ({
+  id,
+  name: `Product ${id + 1}`,
+  imageUrl: `https://picsum.photos/id/${id + 10}/600/400`,
+}));
+
+export default function App() {
+  return <Carousel products={exampleProducts} />;
+}

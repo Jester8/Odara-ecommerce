@@ -1,6 +1,7 @@
 import Carousel from './components/Carousel';
 import { getCarouselProducts } from '../app/components/Utils/Carousel';
 import ProductCarousel from './components/ProductCarousel';
+import ProductCard from "../app/components/ProductCard"
 
 export default function Home() {
   const products = getCarouselProducts();
@@ -14,6 +15,7 @@ export default function Home() {
         <div className="w-full">
           <ProductCarousel />
         </div>
+        <ProductCard/>
       </div>
     </div>
   );

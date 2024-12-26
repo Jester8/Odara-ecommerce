@@ -35,7 +35,7 @@ const Topbar = () => {
     <>
       <div
         className={`${
-          darkMode ? "bg-black text-white" : "bg-white text-black shadow-md"
+          darkMode ? "bg-gray-800 text-white" : "bg-white text-black shadow-md"
         } px-4 py-2 flex flex-col sm:flex-row items-center justify-between font-slab relative`}
       >
         {/* Desktop/Laptop Navigation */}

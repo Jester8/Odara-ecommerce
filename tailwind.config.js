@@ -12,6 +12,12 @@ module.exports = {
         slab: ["var(--font-roboto-slab)", "serif"],
       },
     },
+    theme: {
+      screens: {
+        'xs': '320px',
+        // ... other breakpoints
+      }
+    }
   },
   plugins: [],
 };
