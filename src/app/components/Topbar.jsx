@@ -164,7 +164,7 @@ const Topbar = () => {
           <div className="flex justify-between items-center mb-4 w-full">
             <div className="text-1xl font-bold flex items-center">
               {/* Hamburger ONLY for mobile */}
-              <IconButton className="mr-2" onClick={toggleSidebar}>
+              <IconButton className="mr-2 block sm:hidden md:block lg:hidden" onClick={toggleSidebar}>
                 <Menu className={darkMode ? "text-white" : "text-black"} />
               </IconButton>
               ODARA

@@ -8,14 +8,16 @@ export default function Home() {
 
   return (
     <div className="container mx-auto px-4 mt-4 mr-9">
-      <div className="space-y-16"> 
+      <div className="space-y-2"> 
         <div className="w-full">
           <Carousel products={products} />
         </div>
         <div className="w-full">
           <ProductCarousel />
         </div>
+        <div className="w-full">
         <ProductCard/>
+        </div>
       </div>
     </div>
   );

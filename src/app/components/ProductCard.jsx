@@ -93,11 +93,11 @@ const ProductCard = () => {
 
 
   const renderSection = (title, data) => (
-    <div>
+    <div >
       <h2 className="bg-red-500 dark:bg-red-600 text-white text-center py-1 rounded mb-2 text-xs sm:text-sm">{title}</h2>
       <div className="w-full">
         {/* Mobile view with two centered cards */}
-        <div className="block sm:hidden w-full overflow-x-auto no-scrollbar bg-transparent">
+        <div className="block sm:hidden w-full overflow-x-auto no-scrollbar bg-transparent ">
           <div className="flex gap-0 w-max pl-5 pr-4">
             {loading 
               ? [...Array(6)].map((_, i) => <ProductCardSkeleton key={i} />)

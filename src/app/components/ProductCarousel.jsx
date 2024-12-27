@@ -111,8 +111,8 @@ const ProductCarousel = () => {
             ? Array(4).fill(null).map((_, index) => <ProductSkeleton key={index} />)
             : products.map((product) => (
                 <div key={product.id} className="hidden md:block w-full sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/5 2xl:w-1/6 flex-shrink-0 p-0.5">
-                  <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm hover:shadow-md transition-shadow duration-300 h-[260px]">
-                    <div className="aspect-[4/3] relative overflow-hidden rounded-t-lg">
+                  <div className="bg-white dark:bg-gray-800 rounded-none shadow-sm hover:shadow-md transition-shadow duration-300 h-[260px]">
+                    <div className="aspect-[4/3] relative overflow-hidden rounded-none">
                       <Image
                         src={product.image}
                         alt={product.name}
