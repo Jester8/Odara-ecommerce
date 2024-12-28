@@ -1,6 +1,6 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import { ShoppingCart, Star, Image as ImageIcon } from "lucide-react";
+import { ShoppingCart, Star, Image as ImageIcon, ChevronRight } from "lucide-react";
 import products from "./Utils/product";
 
 const ProductCardSkeleton = () => (
@@ -91,13 +91,18 @@ const ProductCard = () => {
     return () => clearTimeout(timer);
   }, []);
 
-
   const renderSection = (title, data) => (
-    <div >
-      <h2 className="bg-red-500 dark:bg-red-600 text-white text-center py-1 rounded mb-2 text-xs sm:text-sm">{title}</h2>
+    <div>
+      <div className="bg-red-900 dark:bg-red-800 text-white py-3 rounded-t px-4 flex justify-between items-center">
+        <h2 className="text-xs sm:text-sm">{title}</h2>
+        <button className="flex items-center text-xs hover:text-gray-200 transition-colors duration-200">
+          See More
+          <ChevronRight size={16} className="ml-1" />
+        </button>
+      </div>
       <div className="w-full">
         {/* Mobile view with two centered cards */}
-        <div className="block sm:hidden w-full overflow-x-auto no-scrollbar bg-transparent ">
+        <div className="block sm:hidden w-full overflow-x-auto no-scrollbar bg-transparent">
           <div className="flex gap-0 w-max pl-5 pr-4">
             {loading 
               ? [...Array(6)].map((_, i) => <ProductCardSkeleton key={i} />)
@@ -106,7 +111,7 @@ const ProductCard = () => {
           </div>
         </div>
         
-        {/* Desktop view remains unchanged */}
+        {/* Desktop view */}
         <div className="hidden sm:grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 w-full gap-x-1 gap-y-2">
           {loading 
             ? [...Array(ITEMS_PER_SECTION)].map((_, i) => <ProductCardSkeleton key={i} />)
@@ -116,6 +121,7 @@ const ProductCard = () => {
       </div>
     </div>
   );
+
   const updatedProducts = products.map((product, index) => ({
     ...product,
     image: `https://picsum.photos/300/300?random=${index}`,

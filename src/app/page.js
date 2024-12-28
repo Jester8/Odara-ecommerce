@@ -2,6 +2,7 @@ import Carousel from './components/Carousel';
 import { getCarouselProducts } from '../app/components/Utils/Carousel';
 import ProductCarousel from './components/ProductCarousel';
 import ProductCard from "../app/components/ProductCard"
+import ProductGrid from './components/ProductGrid';
 
 export default function Home() {
   const products = getCarouselProducts();
@@ -18,6 +19,10 @@ export default function Home() {
         <div className="w-full">
         <ProductCard/>
         </div>
+        
+        <div className="w-full">
+          <ProductGrid/>
+          </div>
       </div>
     </div>
   );

@@ -1,27 +1,69 @@
 "use client";
 
 import React, { useState } from "react";
-import { IconButton } from "@mui/material";
-import { Search, PersonOutline, ShoppingCartOutlined, Menu } from "@mui/icons-material";
+import {
+  IconButton,
+  List,
+  ListItem,
+  ListItemText,
+  Paper,
+} from "@mui/material";
+import {
+  Search,
+  PersonOutline,
+  ShoppingCartOutlined,
+  Menu,
+} from "@mui/icons-material";
 import { MoonIcon, SunIcon } from "lucide-react";
 import "tailwindcss/tailwind.css";
 import AuthCard from "./Utils/AuthCard";
 import { Sidebar } from "./Sidebar";
 import { useDarkMode } from "../components/context/Darkmode";
 
+const mockData = [
+  { id: 1, name: "Laptop" },
+  { id: 2, name: "Phone" },
+  { id: 3, name: "Headphones" },
+  { id: 4, name: "Shoes" },
+  { id: 5, name: "Shirts" },
+  { id: 6, name: "Smartwatch" },
+  { id: 7, name: "Bag" },
+  { id: 8, name: "Furniture" },
+];
+
 const Topbar = () => {
   const [language, setLanguage] = useState("en");
   const [authCardVisible, setAuthCardVisible] = useState(false);
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [query, setQuery] = useState("");
+  const [results, setResults] = useState([]);
+  const { darkMode, toggleDarkMode } = useDarkMode();
 
   const handleLanguageChange = (lang) => {
     setLanguage(lang);
   };
 
-  const { darkMode, toggleDarkMode } = useDarkMode();
-
   const toggleSidebar = () => {
     setSidebarOpen(!sidebarOpen);
+  };
+
+  const handleSearch = (e) => {
+    const value = e.target.value.toLowerCase();
+    setQuery(value);
+
+    if (value.trim() === "") {
+      setResults([]);
+      return;
+    }
+
+    const filteredResults = mockData.filter((item) =>
+      item.name.toLowerCase().includes(value)
+    );
+    setResults(filteredResults);
+  };
+
+  const handleButtonClick = () => {
+    alert(`Searching for "${query}"`);
   };
 
   const languages = [
@@ -40,15 +82,16 @@ const Topbar = () => {
       >
         {/* Desktop/Laptop Navigation */}
         <div className="hidden md:flex items-center justify-between w-full max-w-screen-2xl mx-auto">
-          {/* ODARA Logo */}
           <div className="text-2xl font-bold min-w-max mr-4">ODARA</div>
 
           <div className="flex items-center w-full space-x-4">
             {/* Search Input Container */}
-            <div className="flex-grow flex items-center space-x-2 max-w-[800px] mx-auto">
+            <div className="flex-grow flex items-center space-x-2 max-w-[800px] mx-auto relative">
               <div className="relative w-full">
                 <input
                   type="search"
+                  value={query}
+                  onChange={handleSearch}
                   className={`w-full rounded-md border border-solid ${
                     darkMode
                       ? "border-gray-600 bg-gray-700 text-white placeholder:text-gray-400"
@@ -66,10 +109,10 @@ const Topbar = () => {
               <button
                 className={`min-w-max ${
                   darkMode
-                    ? "bg-red-600 text-white"
-                    : "bg-red-600 text-white"
+                    ? "bg-red-800 text-white"
+                    : "bg-red-800 text-white"
                 } rounded-md px-4 py-2 shadow-lg text-md font-medium transition duration-150 ease-in-out focus:outline-none`}
-                type="button"
+                onClick={handleButtonClick}
               >
                 SEARCH
               </button>
@@ -77,7 +120,6 @@ const Topbar = () => {
 
             {/* Right Side Actions */}
             <div className="flex items-center space-x-4 lg:space-x-4 md:space-x-2">
-              {/* Sign In/Up Section */}
               <div
                 className="relative flex items-center space-x-2 md:space-x-0"
                 onMouseEnter={() => setAuthCardVisible(true)}
@@ -108,8 +150,6 @@ const Topbar = () => {
                     Sign in/Sign up
                   </span>
                 </div>
-
-                {/* Auth Card */}
                 {authCardVisible && (
                   <div className="absolute top-full left-0 mt-2 z-10">
                     <AuthCard />
@@ -117,7 +157,6 @@ const Topbar = () => {
                 )}
               </div>
 
-              {/* Cart Section */}
               <div className="flex items-center space-x-2 md:space-x-0">
                 <IconButton
                   aria-label="cart"
@@ -146,11 +185,10 @@ const Topbar = () => {
                 </div>
               </div>
 
-              {/* Dark Mode Toggle */}
               <button
                 onClick={toggleDarkMode}
                 className={`p-1 rounded-full ${
-                  darkMode ? "bg-red-500" : "bg-red-500"
+                  darkMode ? "bg-red-800" : "bg-red-800"
                 } text-white`}
               >
                 {darkMode ? <SunIcon size={16} /> : <MoonIcon size={16} />}
@@ -163,14 +201,11 @@ const Topbar = () => {
         <div className="md:hidden w-full">
           <div className="flex justify-between items-center mb-4 w-full">
             <div className="text-1xl font-bold flex items-center">
-              {/* Hamburger ONLY for mobile */}
               <IconButton className="mr-2 block sm:hidden md:block lg:hidden" onClick={toggleSidebar}>
                 <Menu className={darkMode ? "text-white" : "text-black"} />
               </IconButton>
               ODARA
             </div>
-
-            {/* Mobile Icons Container */}
             <div className="flex items-center gap-2">
               <IconButton
                 aria-label="sign in/signup"
@@ -193,18 +228,18 @@ const Topbar = () => {
               <button
                 onClick={toggleDarkMode}
                 className={`p-1 rounded-full ${
-                  darkMode ? "bg-red-500" : "bg-red-500"
+                  darkMode ? " bg-red-700" :  "bg-red-700"
                 } text-white`}
               >
                 {darkMode ? <SunIcon size={16} /> : <MoonIcon size={16} />}
               </button>
             </div>
           </div>
-
-          {/* Mobile Search */}
           <div className="relative w-full">
             <input
               type="search"
+              value={query}
+              onChange={handleSearch}
               className={`w-full rounded-full border border-solid ${
                 darkMode
                   ? "border-gray-700 bg-gray-800 text-white placeholder:text-gray-500"
@@ -220,8 +255,6 @@ const Topbar = () => {
           </div>
         </div>
       </div>
-
-      {/* Sidebar Component */}
       <Sidebar open={sidebarOpen} onClose={() => setSidebarOpen(false)} />
     </>
   );
