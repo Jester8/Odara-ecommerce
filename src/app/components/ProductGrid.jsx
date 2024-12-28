@@ -5,7 +5,7 @@ import { ImageIcon } from 'lucide-react';
 import Image from 'next/image';
 import pic1 from '../Images/Xiaomi_712x384_FS.jpg';
 import pic2 from '../Images/pic1.jpg';
-import pic3 from '../images/pic2.jpg';
+import pic3 from '../Images/pic2.jpg';
 
 const ProductGrid = () => {
   const [isLoading, setIsLoading] = useState(true);
