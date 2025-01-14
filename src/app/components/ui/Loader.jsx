@@ -1,5 +1,5 @@
 import React from 'react';
-import lightlogo from '../../assets/img/Odara invert.png'
+import lightlogo from '../../assets/img/Odara invert.png';
 import Image from 'next/image';
 
 const Loader = () => {
@@ -13,7 +13,6 @@ const Loader = () => {
           height={50} 
           className="mx-auto"
         />
-      
       </div>
     </div>
   );
