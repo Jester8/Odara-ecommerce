@@ -25,6 +25,7 @@ import {
   Toys as BabyIcon,
   ImageNotSupported as ImagePlaceholderIcon
 } from "@mui/icons-material";
+import { useDarkMode } from "../components/context/Darkmode";
 
 const Carousel = ({ products = [] }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
