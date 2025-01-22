@@ -84,14 +84,14 @@ const ProductCardItem = ({ product }) => {
               ✕
             </button>
             <div className="flex items-center justify-center mb-3 xs:mb-4">
-              <ShoppingCart size={20} className="text-red-900 dark:text-red-700" />
+              <ShoppingCart size={20} className="text-purple-900 dark:text-purple-800" />
             </div>
             <div className="text-sm xs:text-base sm:text-lg mb-3 xs:mb-4 text-gray-800 dark:text-white font-semibold text-center">
               You've added 4 items! Would you like to add more to your cart?
             </div>
             <div className="flex gap-2 justify-center">
               <button 
-                className="bg-red-900 text-white px-3 py-2 rounded-lg hover:bg-red-800 transition-colors text-sm font-medium flex items-center gap-1"
+                className="bg-purple-900 text-white px-3 py-2 rounded-lg hover:bg-purple-900 transition-colors text-sm font-medium flex items-center gap-1"
                 onClick={handleAddMore}
               >
                 <ShoppingCart size={14} />
@@ -133,7 +133,7 @@ const ProductCardItem = ({ product }) => {
                 >
                   <ShoppingCart size={12} className="text-gray-800 dark:text-gray-200" />
                   {cartCount > 0 && (
-                    <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs w-4 h-4 rounded-full flex items-center justify-center">
+                    <span className="absolute -top-2 -right-2 bg-purple-500 text-white text-xs w-4 h-4 rounded-full flex items-center justify-center">
                       {cartCount}
                     </span>
                   )}
@@ -184,7 +184,7 @@ const ProductCard = () => {
 
   const renderSection = (title, data) => (
     <div>
-      <div className="bg-red-900 dark:bg-red-800 text-white py-3 rounded-t px-4 flex justify-between items-center">
+      <div className="bg-purple-900 dark:bg-purple-800 text-white py-3 rounded-t px-4 flex justify-between items-center">
         <h2 className="text-xs sm:text-sm">{title}</h2>
         <button className="flex items-center text-xs hover:text-gray-200 transition-colors duration-200">
           See More

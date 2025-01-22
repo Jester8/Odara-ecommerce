@@ -12,9 +12,13 @@ import {
   PrivacyTipOutlined,
 } from "@mui/icons-material";
 import { LogIn } from "lucide-react";
+import Link from "next/link"; 
+import { useRouter } from "next/navigation";
 import "tailwindcss/tailwind.css";
 
 const AuthCard = (props) => {
+  const router = useRouter();
+
   const {
     style,
     className = "",
@@ -32,22 +36,28 @@ const AuthCard = (props) => {
 
   return (
     <div
-      className={`bg-white shadow-lg rounded-lg p-4 w-60 sm:w-72 ${className}`}
+      className={`bg-white shadow-lg rounded-none p-4 w-60 sm:w-72 ${className}`}
       style={style}
     >
       {/* Sign In and Register Buttons */}
       <div className="flex flex-col items-center gap-2 mb-4">
+        <Link href="/signin">
         <button
-          className="w-full w-90 bg-emerald-600 text-xl text-white py-2 rounded-full font-medium hover:bg-emerald-600"
-        >
-          Sign In
-        </button>
-       <h2 className="text-1xl">
-         Register
-       </h2>
-      
-
+                type="submit"
+                className="w-[250px] bg-purple-900 text-white py-2 px-4 rounded-full hover:bg-purple-800 transition duration-200"
+              >
+                Sign in
+              </button>
+        </Link>
+        <button
+                type="submit"
+                className="w-[250px] bg-orange-600 text-white py-2 px-4 rounded-full hover:bg-orange-600 transition duration-200"
+                onClick={() => router.push("/signup")}
+              >
+                Sign up
+              </button>
       </div>
+  
 
       {/* Menu Items */}
       {data.map((item, index) => (
@@ -60,7 +70,7 @@ const AuthCard = (props) => {
               {item.label}
             </div>
           </div>
-          {index === 4 && <Divider className="my-2" />} {/* Divider after Wishlist */}
+          {index === 4 && <Divider className="my-2" />}
         </React.Fragment>
       ))}
     </div>

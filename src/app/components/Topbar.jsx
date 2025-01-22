@@ -121,8 +121,8 @@ const Topbar = () => {
               <button
                 className={`min-w-max ${
                   darkMode
-                    ? "bg-red-800 text-white"
-                    : "bg-red-800 text-white"
+                    ? "bg-purple-900 text-white"
+                    : "bg-purple-900 text-white"
                 } rounded-md px-4 py-2 shadow-lg text-md font-medium transition duration-150 ease-in-out focus:outline-none`}
                 onClick={handleButtonClick}
               >
@@ -200,7 +200,7 @@ const Topbar = () => {
               <button
                 onClick={toggleDarkMode}
                 className={`p-1 rounded-full ${
-                  darkMode ? "bg-red-800" : "bg-red-800"
+                  darkMode ? "bg-purple-900" : "bg-purple-900"
                 } text-white`}
               >
                 {darkMode ? <SunIcon size={16} /> : <MoonIcon size={16} />}
@@ -246,7 +246,7 @@ const Topbar = () => {
               <button
                 onClick={toggleDarkMode}
                 className={`p-1 rounded-full ${
-                  darkMode ? " bg-red-700" :  "bg-red-700"
+                  darkMode ? " bg-purple-700" :  "bg-purple-700"
                 } text-white`}
               >
                 {darkMode ? <SunIcon size={16} /> : <MoonIcon size={16} />}

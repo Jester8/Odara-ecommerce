@@ -27,7 +27,7 @@ const ProductGrid = () => {
 
   return (
     <div className="w-full p-0.5">
-    <div className="bg-red-900 dark:bg-red-800 text-white py-3 rounded-t px-4 flex justify-between items-center text-center">
+    <div className="bg-purple-900 dark:bg-purple-800 text-white py-3 rounded-t px-4 flex justify-between items-center text-center">
         <h2 className="text-2xs sm:text-sm">Newest Product</h2>
         
       </div>
