@@ -13,7 +13,7 @@ const inter = Inter({ subsets: ["latin"] });
 
 export default function RootLayout({ children }) {
   const [loading, setLoading] = useState(true);
-  const pathname = usePathname(); // Get the current pathname
+  const pathname = usePathname();
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -23,8 +23,7 @@ export default function RootLayout({ children }) {
     return () => clearTimeout(timer);
   }, []);
 
-  // Check if the current route is '/signup'
-  const isSignupPage = pathname === "/signup";
+  const isAuthPage = pathname === "/signin" || pathname === "/signup";
 
   return (
     <html lang="en">
@@ -37,9 +36,9 @@ export default function RootLayout({ children }) {
               <Loader />
             ) : (
               <>
-                {!isSignupPage && <Topbar />}
+                {!isAuthPage && <Topbar />}
                 {children}
-                {!isSignupPage && <Footer />}
+                {!isAuthPage && <Footer />}
               </>
             )}
           </div>
