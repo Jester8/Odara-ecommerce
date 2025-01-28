@@ -5,8 +5,10 @@ import { Eye, EyeOff, Mail, Lock, ArrowLeft, User, Phone, Calendar } from "lucid
 import Link from "next/link";
 import auth from "../assets/img/auth.jpg";
 import logo from "../assets/img/Odara invert.png";
+import { useRouter } from "next/navigation";
 
 const Signup = () => {
+  const router = useRouter();
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [currentStep, setCurrentStep] = useState(1);
@@ -36,7 +38,7 @@ const Signup = () => {
 
       <div className="flex-1 flex items-center justify-center p-4">
         {/* Rest of the component remains the same */}
-        <div className="bg-white rounded-lg shadow-lg flex flex-col sm:flex-row w-full max-w-6xl overflow-hidden">
+        <div className="bg-white rounded-lg shadow-sm flex flex-col sm:flex-row w-full max-w-6xl overflow-hidden">
           <div className="w-full sm:w-1/2 p-4 sm:p-8">
             {/* Previous code remains identical from here onwards */}
             {currentStep === 1 && (
@@ -145,6 +147,8 @@ const Signup = () => {
                     <button
                       type="button"
                       className="w-1/3 bg-orange-500 text-white py-3 sm:py-2 px-4 rounded-md hover:bg-orange-400 transition duration-200 text-base"
+                onClick={() => router.push("/signin")}
+
                     >
                       Skip
                     </button>

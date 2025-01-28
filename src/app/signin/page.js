@@ -5,6 +5,7 @@ import { Eye, EyeOff, Mail, Lock } from "lucide-react";
 import auth from "../assets/img/auth1.png";
 import logo from "../assets/img/Odara invert.png";
 import google from "../assets/img/google.png";
+import Link from "next/link";
 
 const Signin = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -22,7 +23,7 @@ const Signin = () => {
       </div>
 
       <div className="flex-1 flex items-center justify-center p-4">
-        <div className="bg-white rounded-lg shadow-lg flex flex-col sm:flex-row w-full max-w-6xl overflow-hidden">
+        <div className="bg-white rounded-lg shadow-sm flex flex-col sm:flex-row w-full max-w-6xl overflow-hidden">
           <div className="w-full sm:w-1/2 p-8">
             <div className="mb-8 text-center sm:text-left">
               <h2 className="text-3xl font-bold text-gray-900">Welcome Back</h2>
@@ -85,19 +86,14 @@ const Signin = () => {
 
               {/* Remember Me Checkbox */}
               <div className="flex items-center justify-between">
-                <label className="flex items-center text-sm text-gray-600">
+                <label className="flex items-center text-md text-gray-600">
                   <input
                     type="checkbox"
                     className="mr-2 rounded focus:ring focus:ring-purple-300"
                   />
                   Remember Me
                 </label>
-                <a
-                  href="#"
-                  className="text-sm font-medium text-purple-500 hover:underline"
-                >
-                  Forgot Password?
-                </a>
+                <Link href="reset" className="text-purple-500 hover:underline"> <p>Forgot Password</p></Link>
               </div>
 
              
@@ -105,17 +101,12 @@ const Signin = () => {
              
               <button
                 type="button"
-                className="w-full bg-purple-900 text-white py-2 px-5 rounded-md hover:bg-purple-800 transition duration-200"
+                className="w-full bg-purple-900 text-white py-3 px-5 rounded-md hover:bg-purple-800 transition duration-200"
               >
                 Sign In
               </button>
 
-              <div>
 
-                <p className="text-center text-gray-600">
-                  OR
-                  </p>
-                </div>
               
               <button
                 type="button"
@@ -125,13 +116,19 @@ const Signin = () => {
 <Image
                   src={google}
                   alt="Google Logo"
-                  width={40}
+                  width={30}
                   height={40}
                   className="object-contain"
                 />
                
                 Sign in with Google
               </button>
+              <div>
+
+<p className="text-center text-gray-600">
+  Don't have an account? <Link href="/signup" className="text-purple-500 hover:underline">Sign Up</Link>
+  </p>
+</div>
 
             </form>
           </div>

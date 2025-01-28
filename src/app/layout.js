@@ -23,7 +23,7 @@ export default function RootLayout({ children }) {
     return () => clearTimeout(timer);
   }, []);
 
-  const isAuthPage = pathname === "/signin" || pathname === "/signup";
+  const isAuthPage = pathname === "/signin" || pathname === "/signup" || pathname === "/reset";
 
   return (
     <html lang="en">
