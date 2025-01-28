@@ -21,29 +21,34 @@ const Signup = () => {
 
   return (
     <div className="min-h-screen bg-purple-50 flex flex-col">
-      <div className="w-full py-4 flex justify-center sm:justify-start px-4 sm:px-8">
-        <Image
-          src={logo}
-          alt="Odara Logo"
-          width={150}
-          height={150}
-          className="object-contain"
-        />
+      {/* Updated logo container with mobile-specific positioning and scaling */}
+      <div className="w-full py-4 sm:py-4 flex justify-center sm:justify-start px-4 sm:px-8 sm:static absolute">
+        <div className="sm:transform-none transform scale-40 sm:scale-100">
+          <Image
+            src={logo}
+            alt="Odara Logo"
+            width={150}
+            height={150}
+            className="object-contain"
+          />
+        </div>
       </div>
 
       <div className="flex-1 flex items-center justify-center p-4">
+        {/* Rest of the component remains the same */}
         <div className="bg-white rounded-lg shadow-lg flex flex-col sm:flex-row w-full max-w-6xl overflow-hidden">
-          <div className="w-full sm:w-1/2 p-8">
+          <div className="w-full sm:w-1/2 p-4 sm:p-8">
+            {/* Previous code remains identical from here onwards */}
             {currentStep === 1 && (
               <>
-                <div className="mb-8 text-center sm:text-left">
-                  <h2 className="text-3xl font-bold text-gray-900">Create Your Account</h2>
+                <div className="mb-6 sm:mb-8 text-center sm:text-left">
+                  <h2 className="text-2xl sm:text-3xl font-bold text-gray-900">Create Your Account</h2>
                   <p className="text-gray-600 mt-2">
                     Welcome to Odara. Please create your account to get started.
                   </p>
                 </div>
 
-                <form className="space-y-6">
+                <form className="space-y-4 sm:space-y-6">
                   <div>
                     <label
                       htmlFor="firstName"
@@ -55,7 +60,7 @@ const Signup = () => {
                       <input
                         type="text"
                         id="firstName"
-                        className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-md focus:ring-purple-500 focus:border-purple-500 outline-none"
+                        className="w-full pl-10 pr-4 py-3 sm:py-2 border border-gray-300 rounded-md focus:ring-purple-500 focus:border-purple-500 outline-none text-base"
                         placeholder="Enter your first name"
                       />
                       <User
@@ -76,7 +81,7 @@ const Signup = () => {
                       <input
                         type="text"
                         id="lastName"
-                        className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-md focus:ring-purple-500 focus:border-purple-500 outline-none"
+                        className="w-full pl-10 pr-4 py-3 sm:py-2 border border-gray-300 rounded-md focus:ring-purple-500 focus:border-purple-500 outline-none text-base"
                         placeholder="Enter your last name"
                       />
                       <User
@@ -95,7 +100,7 @@ const Signup = () => {
                     </label>
                     <div className="flex items-center border border-gray-300 rounded-md overflow-hidden">
                       <select
-                        className="px-2 py-2 bg-gray-100 border-r border-gray-300 focus:outline-none"
+                        className="px-2 py-3 sm:py-2 bg-gray-100 border-r border-gray-300 focus:outline-none text-base"
                       >
                         <option value="+234">🇳🇬 NG</option>
                         <option value="+228">🇹🇬 TG</option>
@@ -105,7 +110,7 @@ const Signup = () => {
                         <input
                           type="tel"
                           id="phoneNumber"
-                          className="w-full pl-10 pr-4 py-2 focus:ring-purple-500 focus:border-purple-500 outline-none"
+                          className="w-full pl-10 pr-4 py-3 sm:py-2 focus:ring-purple-500 focus:border-purple-500 outline-none text-base"
                           placeholder="Enter your phone number"
                         />
                         <Phone
@@ -127,7 +132,7 @@ const Signup = () => {
                       <input
                         type="date"
                         id="dob"
-                        className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-md focus:ring-purple-500 focus:border-purple-500 outline-none"
+                        className="w-full pl-10 pr-4 py-3 sm:py-2 border border-gray-300 rounded-md focus:ring-purple-500 focus:border-purple-500 outline-none text-base"
                       />
                       <Calendar
                         className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"
@@ -139,14 +144,14 @@ const Signup = () => {
                   <div className="flex justify-between">
                     <button
                       type="button"
-                      className="w-1/3 bg-orange-500 text-white py-2 px-4 rounded-md hover:bg-orange-400 transition duration-200"
+                      className="w-1/3 bg-orange-500 text-white py-3 sm:py-2 px-4 rounded-md hover:bg-orange-400 transition duration-200 text-base"
                     >
                       Skip
                     </button>
                     <button
                       type="button"
                       onClick={handleContinue}
-                      className="w-1/3 bg-purple-900 text-white py-2 px-4 rounded-md hover:bg-purple-800 transition duration-200"
+                      className="w-1/3 bg-purple-900 text-white py-3 sm:py-2 px-4 rounded-md hover:bg-purple-800 transition duration-200 text-base"
                     >
                       Next
                     </button>
@@ -157,7 +162,7 @@ const Signup = () => {
 
             {currentStep === 2 && (
               <>
-                <div className="mb-8 text-center sm:text-left flex items-center justify-between">
+                <div className="mb-6 sm:mb-8 text-center sm:text-left flex items-center justify-between">
                   <button
                     onClick={handleBack}
                     className="bg-white p-2 rounded-full shadow-lg flex items-center justify-center"
@@ -166,7 +171,7 @@ const Signup = () => {
                   </button>
                 </div>
 
-                <form className="space-y-6">
+                <form className="space-y-4 sm:space-y-6">
                   <div>
                     <label
                       htmlFor="email"
@@ -178,7 +183,7 @@ const Signup = () => {
                       <input
                         type="email"
                         id="email"
-                        className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-md focus:ring-purple-500 focus:border-purple-500 outline-none"
+                        className="w-full pl-10 pr-4 py-3 sm:py-2 border border-gray-300 rounded-md focus:ring-purple-500 focus:border-purple-500 outline-none text-base"
                         placeholder="Email address"
                       />
                       <Mail
@@ -199,7 +204,7 @@ const Signup = () => {
                       <input
                         type={showPassword ? "text" : "password"}
                         id="password"
-                        className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-md focus:ring-purple-500 focus:border-purple-500 outline-none"
+                        className="w-full pl-10 pr-4 py-3 sm:py-2 border border-gray-300 rounded-md focus:ring-purple-500 focus:border-purple-500 outline-none text-base"
                         placeholder="Enter Password"
                       />
                       <Lock
@@ -227,7 +232,7 @@ const Signup = () => {
                       <input
                         type={showConfirmPassword ? "text" : "password"}
                         id="confirmPassword"
-                        className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-md focus:ring-purple-500 focus:border-purple-500 outline-none"
+                        className="w-full pl-10 pr-4 py-3 sm:py-2 border border-gray-300 rounded-md focus:ring-purple-500 focus:border-purple-500 outline-none text-base"
                         placeholder="Confirm Password"
                       />
                       <Lock
@@ -246,7 +251,7 @@ const Signup = () => {
 
                   <button
                     type="submit"
-                    className="w-full bg-purple-900 text-white py-2 px-4 rounded-md hover:bg-purple-800 transition duration-200"
+                    className="w-full bg-purple-900 text-white py-3 sm:py-2 px-4 rounded-md hover:bg-purple-800 transition duration-200 text-base"
                   >
                     Create Your Account
                   </button>
