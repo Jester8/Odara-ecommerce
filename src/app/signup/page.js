@@ -6,9 +6,13 @@ import Link from "next/link";
 import auth from "../assets/img/auth.jpg";
 import logo from "../assets/img/Odara invert.png";
 import { useRouter } from "next/navigation";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+
 
 const Signup = () => {
   const router = useRouter();
+  const [dob, setDob] = useState(null);
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [currentStep, setCurrentStep] = useState(1);
@@ -124,24 +128,26 @@ const Signup = () => {
                   </div>
 
                   <div>
-                    <label
-                      htmlFor="dob"
-                      className="block text-sm font-medium text-gray-700"
-                    >
-                      Date Of Birth
-                    </label>
-                    <div className="mt-1 relative">
-                      <input
-                        type="date"
-                        id="dob"
-                        className="w-full pl-10 pr-4 py-3 sm:py-2 border border-gray-300 rounded-md focus:ring-purple-500 focus:border-purple-500 outline-none text-base"
-                      />
-                      <Calendar
-                        className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"
-                        size={20}
-                      />
-                    </div>
-                  </div>
+      <label
+        htmlFor="dob"
+        className="block text-sm font-medium text-gray-700"
+      >
+        Date Of Birth
+      </label>
+      <div className="mt-1 relative">
+        <DatePicker
+          selected={dob}
+          onChange={(date) => setDob(date)}
+          dateFormat="dd/MM/yyyy"
+          placeholderText="Select your date of birth"
+           className="w-full pl-10 pr-4 py-3 sm:py-2 border border-gray-300 rounded-md focus:ring-purple-500 focus:border-purple-500 outline-none text-base"
+        />
+        <Calendar
+          className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"
+          size={20}
+        />
+      </div>
+    </div>
 
                   <div className="flex justify-between">
                     <button
