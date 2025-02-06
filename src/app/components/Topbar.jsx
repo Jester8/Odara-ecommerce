@@ -22,7 +22,7 @@ import { useDarkMode } from "../components/context/Darkmode";
 import lightlogo from '../assets/img/Odara png.png'
 import darklogo from "../assets/img/Odara invert.png"
 import Image from 'next/image';
-
+import { useRouter } from 'next/navigation';
 
 const mockData = [
   { id: 1, name: "Laptop" },
@@ -36,6 +36,7 @@ const mockData = [
 ];
 
 const Topbar = () => {
+  const router = useRouter();
   const [language, setLanguage] = useState("en");
   const [authCardVisible, setAuthCardVisible] = useState(false);
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -70,6 +71,10 @@ const Topbar = () => {
     alert(`Searching for "${query}"`);
   };
 
+  const navigateToSignin = () => {
+    router.push('/signin');
+  };
+
   const languages = [
     { code: "en", name: "Eng", flag: "https://flagcdn.com/ng.svg" },
     { code: "fr", name: "Fr", flag: "https://flagcdn.com/ci.svg" },
@@ -87,14 +92,14 @@ const Topbar = () => {
         {/* Desktop/Laptop Navigation */}
         <div className="hidden md:flex items-center justify-between w-full max-w-screen-2xl mx-auto">
           <div className="text-2xl font-bold min-w-max mr-4">
-          <Image 
-    src={darkMode ? lightlogo : darklogo}
-    alt="Odara Logo"
-    width={120}
-    height={40}
-    className="object-contain"
-  />
-            </div>
+            <Image 
+              src={darkMode ? lightlogo : darklogo}
+              alt="Odara Logo"
+              width={120}
+              height={40}
+              className="object-contain"
+            />
+          </div>
 
           <div className="flex items-center w-full space-x-4">
             {/* Search Input Container */}
@@ -140,6 +145,7 @@ const Topbar = () => {
                 <IconButton
                   aria-label="sign in/signup"
                   className={darkMode ? "text-gray-200" : "text-gray-900"}
+                  onClick={navigateToSignin}
                 >
                   <PersonOutline
                     className={darkMode ? "text-white" : "text-black"}
@@ -212,22 +218,23 @@ const Topbar = () => {
         {/* Mobile Navigation */}
         <div className="md:hidden w-full">
           <div className="flex justify-between items-center mb-4 w-full">
-          <div className="text-1xl font-bold flex items-center">
-  <IconButton className="mr-2  block sm:hidden md:block lg:hidden" onClick={toggleSidebar}>
-    <Menu className={darkMode ? "text-white" : "text-black"} />
-  </IconButton>
-  <Image 
-    src={darkMode ? lightlogo : darklogo}
-    alt="Odara Logo"
-    width={100}
-    height={35}
-    className="object-contain mb-2"
-  />
-</div>
+            <div className="text-1xl font-bold flex items-center">
+              <IconButton className="mr-2 block sm:hidden md:block lg:hidden" onClick={toggleSidebar}>
+                <Menu className={darkMode ? "text-white" : "text-black"} />
+              </IconButton>
+              <Image 
+                src={darkMode ? lightlogo : darklogo}
+                alt="Odara Logo"
+                width={100}
+                height={35}
+                className="object-contain mb-2"
+              />
+            </div>
             <div className="flex items-center gap-2">
               <IconButton
                 aria-label="sign in/signup"
                 className={darkMode ? "text-white" : "text-gray-900"}
+                onClick={navigateToSignin}
               >
                 <PersonOutline
                   className={darkMode ? "text-white" : "text-gray-600"}
@@ -246,7 +253,7 @@ const Topbar = () => {
               <button
                 onClick={toggleDarkMode}
                 className={`p-1 rounded-full ${
-                  darkMode ? " bg-purple-700" :  "bg-purple-700"
+                  darkMode ? "bg-purple-700" : "bg-purple-700"
                 } text-white`}
               >
                 {darkMode ? <SunIcon size={16} /> : <MoonIcon size={16} />}
