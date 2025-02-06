@@ -6,9 +6,8 @@ import Link from "next/link";
 import auth from "../assets/img/auth.jpg";
 import logo from "../assets/img/Odara invert.png";
 import { useRouter } from "next/navigation";
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
-
+import { DatePicker } from "rsuite";
+import "rsuite/dist/rsuite.min.css"; // Default styles for rsuite
 
 const Signup = () => {
   const router = useRouter();
@@ -16,9 +15,46 @@ const Signup = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [currentStep, setCurrentStep] = useState(1);
+  const [errors, setErrors] = useState({});
+
+  const validateStep1 = () => {
+    const newErrors = {};
+    const firstName = document.getElementById('firstName').value;
+    const lastName = document.getElementById('lastName').value;
+    const phoneNumber = document.getElementById('phoneNumber').value;
+    const dobValue = dob;
+
+    if (!firstName) newErrors.firstName = 'First name is required';
+    if (!lastName) newErrors.lastName = 'Last name is required';
+    if (!phoneNumber) newErrors.phoneNumber = 'Phone number is required';
+    if (!dobValue) newErrors.dob = 'Date of birth is required';
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
+  const validateStep2 = () => {
+    const newErrors = {};
+    const email = document.getElementById('email').value;
+    const password = document.getElementById('password').value;
+    const confirmPassword = document.getElementById('confirmPassword').value;
+
+    if (!email) newErrors.email = 'Email is required';
+    if (!password) newErrors.password = 'Password is required';
+    if (!confirmPassword) newErrors.confirmPassword = 'Confirm password is required';
+    if (password !== confirmPassword) newErrors.confirmPassword = 'Passwords do not match';
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
 
   const handleContinue = () => {
-    setCurrentStep((prevStep) => prevStep + 1);
+    if (currentStep === 1 && validateStep1()) {
+      setCurrentStep((prevStep) => prevStep + 1);
+    } else if (currentStep === 2 && validateStep2()) {
+      // Handle form submission
+      console.log('Form submitted successfully');
+    }
   };
 
   const handleBack = () => {
@@ -74,6 +110,7 @@ const Signup = () => {
                         size={20}
                       />
                     </div>
+                    {errors.firstName && <p className="text-red-500 text-sm mt-1">{errors.firstName}</p>}
                   </div>
 
                   <div>
@@ -95,6 +132,7 @@ const Signup = () => {
                         size={20}
                       />
                     </div>
+                    {errors.lastName && <p className="text-red-500 text-sm mt-1">{errors.lastName}</p>}
                   </div>
 
                   <div>
@@ -125,36 +163,36 @@ const Signup = () => {
                         />
                       </div>
                     </div>
+                    {errors.phoneNumber && <p className="text-red-500 text-sm mt-1">{errors.phoneNumber}</p>}
                   </div>
 
+                  {/* Date of Birth Input */}
                   <div>
-      <label
-        htmlFor="dob"
-        className="block text-sm font-medium text-gray-700"
-      >
-        Date Of Birth
-      </label>
-      <div className="mt-1 relative">
-        <DatePicker
-          selected={dob}
-          onChange={(date) => setDob(date)}
-          dateFormat="dd/MM/yyyy"
-          placeholderText="Select your date of birth"
-           className="w-full pl-10 pr-4 py-3 sm:py-2 border border-gray-300 rounded-md focus:ring-purple-500 focus:border-purple-500 outline-none text-base"
-        />
-        <Calendar
-          className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"
-          size={20}
-        />
-      </div>
-    </div>
+                    <label
+                      htmlFor="dob"
+                      className="block text-sm font-medium text-gray-700"
+                    >
+                      Date Of Birth
+                    </label>
+                    <div className="mt-1 relative">
+                      <DatePicker
+                        value={dob}
+                        onChange={setDob}
+                        placeholder="Select your date of birth"
+                        className="w-full"
+                        format="dd/MM/yyyy"
+                        cleanable={false}
+                        oneTap
+                      />
+                    </div>
+                    {errors.dob && <p className="text-red-500 text-sm mt-1">{errors.dob}</p>}
+                  </div>
 
                   <div className="flex justify-between">
                     <button
                       type="button"
                       className="w-1/3 bg-orange-500 text-white py-3 sm:py-2 px-4 rounded-md hover:bg-orange-400 transition duration-200 text-base"
-                onClick={() => router.push("/signin")}
-
+                      onClick={() => router.push("/signin")}
                     >
                       Skip
                     </button>
@@ -175,7 +213,7 @@ const Signup = () => {
                 <div className="mb-6 sm:mb-8 text-center sm:text-left flex items-center justify-between">
                   <button
                     onClick={handleBack}
-                    className="bg-white p-2 rounded-full shadow-lg flex items-center justify-center"
+                   className="bg-white p-2 rounded-full shadow-lg flex items-center justify-center"
                   >
                     <ArrowLeft size={24} className="text-gray-700" />
                   </button>
@@ -201,6 +239,7 @@ const Signup = () => {
                         size={20}
                       />
                     </div>
+                    {errors.email && <p className="text-red-500 text-sm mt-1">{errors.email}</p>}
                   </div>
 
                   <div>
@@ -229,6 +268,7 @@ const Signup = () => {
                         {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
                       </button>
                     </div>
+                    {errors.password && <p className="text-red-500 text-sm mt-1">{errors.password}</p>}
                   </div>
 
                   <div>
@@ -257,6 +297,7 @@ const Signup = () => {
                         {showConfirmPassword ? <EyeOff size={20} /> : <Eye size={20} />}
                       </button>
                     </div>
+                    {errors.confirmPassword && <p className="text-red-500 text-sm mt-1">{errors.confirmPassword}</p>}
                   </div>
 
                   <button

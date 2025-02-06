@@ -21,3 +21,11 @@ html {
 body {
   @apply bg-gray-200;
 }
+
+
+.rdp {
+  --rdp-cell-size: 40px;
+  --rdp-accent-color: #6b21a8;
+  --rdp-background-color: #e9d5ff;
+  margin: 1em;
+}
