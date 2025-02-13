@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image";
 import React from "react";
-import { Mail, ArrowLeft } from "lucide-react";
+import { Mail } from "lucide-react";
 import auth from "../assets/img/forgot.webp";
 import logo from "../assets/img/Odara invert.png";
 import Link from "next/link";
@@ -21,15 +21,7 @@ const Reset = () => {
 
       <div className="flex-1 flex items-center justify-center p-4">
         <div className="bg-white rounded-lg shadow-sm flex flex-col sm:flex-row w-full max-w-6xl overflow-hidden relative">
-          {/* Back Arrow - Modified positioning for better mobile responsiveness */}
-          <div className="p-4 sm:absolute sm:left-8 sm:top-8">
-            <Link 
-              href="/signup" 
-              className="inline-flex items-center bg-white p-2 rounded-full shadow-lg text-gray-600 hover:text-purple-800 transition-colors"
-            >
-              <ArrowLeft size={24} />
-            </Link>
-          </div>
+         
           
           <div className="w-full sm:w-1/2 p-8 flex flex-col items-center justify-center">
             <div className="mb-9 text-center">

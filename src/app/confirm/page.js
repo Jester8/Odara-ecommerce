@@ -2,7 +2,6 @@
 import Image from "next/image";
 import React, { useState, useRef } from "react";
 import auth from "../assets/img/hausa.webp";
-import { ArrowLeft } from "lucide-react";
 import logo from "../assets/img/Odara invert.png";
 import Link from "next/link";
 
@@ -57,13 +56,7 @@ const Confirm = () => {
       <div className="flex-1 flex items-center justify-center p-4">
         <div className="bg-white rounded-lg shadow-sm flex flex-col sm:flex-row w-full max-w-6xl overflow-hidden">
           <div className="w-full sm:w-1/2 p-8 flex flex-col items-center justify-center relative">
-            <Link 
-              href="/reset" 
-              className="absolute left-8 top-8 bg-white p-2 rounded-full shadow-lg text-gray-600 hover:text-purple-800 transition-colors"
-            >
-              <ArrowLeft size={24} />
-            </Link>
-            
+           
             <div className="mb-9 text-center">
               <h2 className="text-3xl font-bold text-gray-900">Confirm Code</h2>
               <p className="text-gray-600 mt-2">
