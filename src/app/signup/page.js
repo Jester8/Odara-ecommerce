@@ -27,13 +27,6 @@ const Signup = () => {
 
   const countryCodes = [
     { code: "+234", country: "Nigeria", flag: "🇳🇬" },
-    { code: "+1", country: "United States", flag: "🇺🇸" },
-    { code: "+44", country: "United Kingdom", flag: "🇬🇧" },
-    { code: "+91", country: "India", flag: "🇮🇳" },
-    { code: "+86", country: "China", flag: "🇨🇳" },
-    { code: "+81", country: "Japan", flag: "🇯🇵" },
-    { code: "+49", country: "Germany", flag: "🇩🇪" },
-    { code: "+33", country: "France", flag: "🇫🇷" },
     { code: "+228", country: "Togo", flag: "🇹🇬" },
     { code: "+233", country: "Ghana", flag: "🇬🇭" },
     { code: "+27", country: "South Africa", flag: "🇿🇦" },
@@ -42,10 +35,7 @@ const Signup = () => {
     { code: "+256", country: "Uganda", flag: "🇺🇬" },
     { code: "+251", country: "Ethiopia", flag: "🇪🇹" },
     { code: "+20", country: "Egypt", flag: "🇪🇬" },
-    { code: "+212", country: "Morocco", flag: "🇲🇦" },
-    { code: "+971", country: "UAE", flag: "🇦🇪" },
-    { code: "+966", country: "Saudi Arabia", flag: "🇸🇦" },
-    { code: "+61", country: "Australia", flag: "🇦🇺" }
+   
   ];
 
   const validateForm = () => {
@@ -315,15 +305,16 @@ const Signup = () => {
               </div>
 
               {/* Submit Button */}
-              <div className="flex justify-center mt-6 ">
-                <button
-                  type="submit"
-                  className="w-full sm:w-1/2 bg-purple-900 text-white py-2 px-4 rounded-md hover:bg-purple-800 transition duration-200 text-base"
-                >
-                  Sign Up
-                </button>
-              </div>
+              <button
+                type="button"
+                className="w-full bg-purple-900 text-white py-3 px-5 rounded-md hover:bg-purple-800 transition duration-200"
+              >
+                Sign Up
+              </button>
             </form>
+            <p className="text-center text-gray-600 mt-3">
+  Do you have an account? <Link href="/signin" className="text-purple-500 hover:underline">Sign In</Link>
+  </p>
           </div>
 
 

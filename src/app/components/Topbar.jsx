@@ -7,14 +7,18 @@ import {
   ListItem,
   ListItemText,
   Paper,
+  Menu as MuiMenu,
+  MenuItem,
 } from "@mui/material";
 import {
   Search,
   PersonOutline,
   ShoppingCartOutlined,
   Menu,
+  HelpOutline,
+  KeyboardArrowDown,
 } from "@mui/icons-material";
-import { MoonIcon, SunIcon } from "lucide-react";
+import * as lucideReact from "lucide-react";
 import "tailwindcss/tailwind.css";
 import AuthCard from "./Utils/AuthCard";
 import { Sidebar } from "./Sidebar";
@@ -37,15 +41,17 @@ const mockData = [
 
 const Topbar = () => {
   const router = useRouter();
-  const [language, setLanguage] = useState("en");
+  const [language, setLanguage] = useState("ng");
   const [authCardVisible, setAuthCardVisible] = useState(false);
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [query, setQuery] = useState("");
   const [results, setResults] = useState([]);
   const { darkMode, toggleDarkMode } = useDarkMode();
+  const [showLanguages, setShowLanguages] = useState(false);
 
   const handleLanguageChange = (lang) => {
     setLanguage(lang);
+    setShowLanguages(false);
   };
 
   const toggleSidebar = () => {
@@ -76,17 +82,26 @@ const Topbar = () => {
   };
 
   const languages = [
-    { code: "en", name: "Eng", flag: "https://flagcdn.com/ng.svg" },
-    { code: "fr", name: "Fr", flag: "https://flagcdn.com/ci.svg" },
-    { code: "sw", name: "Sw", flag: "https://flagcdn.com/ke.svg" },
-    { code: "am", name: "Am", flag: "https://flagcdn.com/et.svg" },
+    { code: "ng", name: "NG", fullName: "Nigeria", flag: "https://flagcdn.com/ng.svg" },
+    { code: "za", name: "ZA", fullName: "South Africa", flag: "https://flagcdn.com/za.svg" },
+    { code: "ke", name: "KE", fullName: "Kenya", flag: "https://flagcdn.com/ke.svg" },
+    { code: "gh", name: "GH", fullName: "Ghana", flag: "https://flagcdn.com/gh.svg" },
+    { code: "eg", name: "EG", fullName: "Egypt", flag: "https://flagcdn.com/eg.svg" },
+    { code: "ma", name: "MA", fullName: "Morocco", flag: "https://flagcdn.com/ma.svg" },
+    { code: "tz", name: "TZ", fullName: "Tanzania", flag: "https://flagcdn.com/tz.svg" },
+    { code: "et", name: "ET", fullName: "Ethiopia", flag: "https://flagcdn.com/et.svg" },
+    { code: "ci", name: "CI", fullName: "Côte d'Ivoire", flag: "https://flagcdn.com/ci.svg" },
+    { code: "sn", name: "SN", fullName: "Senegal", flag: "https://flagcdn.com/sn.svg" },
   ];
+
+  // Find current language
+  const currentLanguage = languages.find(lang => lang.code === language) || languages[0];
 
   return (
     <>
       <div
         className={`${
-          darkMode ? "bg-gray-800 text-white" : "bg-white text-black shadow-md"
+          darkMode ? "bg-gray-800 text-white" : "bg-white text-black"
         } px-4 py-2 flex flex-col sm:flex-row items-center justify-between font-slab relative`}
       >
         {/* Desktop/Laptop Navigation */}
@@ -109,10 +124,10 @@ const Topbar = () => {
                   type="search"
                   value={query}
                   onChange={handleSearch}
-                  className={`w-full rounded-md border border-solid ${
+                  className={`w-full rounded-full border border-solid   ${
                     darkMode
-                      ? "border-gray-600 bg-gray-700 text-white placeholder:text-gray-400"
-                      : "border-gray-400 bg-white text-black placeholder:text-gray-500"
+                      ? "border-gray-200 bg-gray-700 text-white  placeholder:text-gray-400"
+                      : "border-none bg-gray-100 text-black placeholder:text-gray-500"
                   } px-4 py-2 pr-10 text-base font-normal outline-none focus:ring-0`}
                   placeholder="Search for any products"
                 />
@@ -122,17 +137,6 @@ const Topbar = () => {
                   />
                 </div>
               </div>
-
-              <button
-                className={`min-w-max ${
-                  darkMode
-                    ? "bg-purple-900 text-white"
-                    : "bg-purple-900 text-white"
-                } rounded-md px-4 py-2 shadow-lg text-md font-medium transition duration-150 ease-in-out focus:outline-none`}
-                onClick={handleButtonClick}
-              >
-                SEARCH
-              </button>
             </div>
 
             {/* Right Side Actions */}
@@ -149,9 +153,10 @@ const Topbar = () => {
                 >
                   <PersonOutline
                     className={darkMode ? "text-white" : "text-black"}
-                    fontSize="large"
+                    fontSize="medium"
                   />
                 </IconButton>
+                
                 <div className="hidden lg:flex flex-col items-start cursor-pointer">
                   <span
                     className={`text-xs ${
@@ -162,7 +167,7 @@ const Topbar = () => {
                   </span>
                   <span
                     className={`text-sm ${
-                      darkMode ? "text-gray-200" : "text-gray-800"
+                      darkMode ? "text-gray-200" : "text-black"
                     } font-bold`}
                   >
                     Sign in/Sign up
@@ -182,14 +187,14 @@ const Topbar = () => {
                 >
                   <ShoppingCartOutlined
                     className={darkMode ? "text-white" : "text-black"}
-                    fontSize="large"
+                    fontSize="medium"
                   />
                 </IconButton>
                 <div className="hidden lg:flex flex-col items-start">
                   <span
                     className={`text-xs ${
                       darkMode ? "text-black bg-white" : "text-white bg-black"
-                    } w-7 text-center rounded-full`}
+                    } w-6 text-center rounded-full`}
                   >
                     0
                   </span>
@@ -202,15 +207,86 @@ const Topbar = () => {
                   </span>
                 </div>
               </div>
-
-              <button
+              
+              {/* Support */}
+              <div className="hidden md:flex items-center space-x-1 cursor-pointer">
+                <IconButton
+                  aria-label="support"
+                  className={darkMode ? "text-gray-200" : "text-gray-900"}
+                >
+                  <HelpOutline
+                    className={darkMode ? "text-white" : "text-black"}
+                    fontSize="medium"
+                  />
+                </IconButton>
+                <div className="hidden lg:flex flex-col items-start">
+                  <span
+                    className={`text-sm ${
+                      darkMode ? "text-gray-200" : "text-gray-800"
+                    } font-bold`}
+                  >
+                    Support
+                  </span>
+                </div>
+              </div>
+              
+              {/* Dark Mode Toggle */}
+              {/* <button
                 onClick={toggleDarkMode}
                 className={`p-1 rounded-full ${
                   darkMode ? "bg-purple-900" : "bg-purple-900"
                 } text-white`}
               >
-                {darkMode ? <SunIcon size={16} /> : <MoonIcon size={16} />}
-              </button>
+                {darkMode ? <lucideReact.SunIcon size={16} /> : <lucideReact.MoonIcon size={16} />}
+              </button> */}
+              
+              {/* Language Selector - Hover style */}
+              <div className="relative">
+                <div 
+                  className="flex items-center space-x-2 cursor-pointer p-1"
+                  onMouseEnter={() => setShowLanguages(true)}
+                  onMouseLeave={() => setShowLanguages(false)}
+                >
+                  <div className="flex items-center gap-2">
+                    <div className="h-5 w-5 rounded-full overflow-hidden border-2 border-gray-100 flex items-center justify-center">
+                      <img 
+                        src={currentLanguage.flag} 
+                        alt={currentLanguage.fullName}
+                        className="h-full w-full object-cover" 
+                      />
+                    </div>
+                    <span className={`text-sm  font-bold hidden md:block ${darkMode ? "text-gray-200" : "text-gray-800"} font-boldd`}>
+                      {currentLanguage.name}
+                    </span>
+                  </div>
+                  
+                  {/* Hover dropdown */}
+                  {showLanguages && (
+                    <div className={`absolute top-full right-0 mt-2 ${darkMode ? "bg-gray-700" : "bg-white"} shadow-lg rounded-lg p-2 z-20 w-48`}>
+                      <div className="grid grid-cols-2 gap-2">
+                        {languages.map((lang) => (
+                          <div 
+                            key={lang.code} 
+                            className={`flex items-center gap-2 p-2 rounded-md cursor-pointer ${lang.code === language ? (darkMode ? "bg-gray-600" : "bg-gray-100") : ""} hover:${darkMode ? "bg-gray-600" : "bg-gray-100"}`}
+                            onClick={() => handleLanguageChange(lang.code)}
+                          >
+                            <div className="h-6 w-6 rounded-full overflow-hidden flex items-center justify-center">
+                              <img 
+                                src={lang.flag} 
+                                alt={lang.fullName}
+                                className="h-full w-full object-cover" 
+                              />
+                            </div>
+                            <span className={`text-sm ${darkMode ? "text-gray-200" : "text-gray-800"}`}>
+                              {lang.name}
+                            </span>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -250,14 +326,58 @@ const Topbar = () => {
                   fontSize="medium"
                 />
               </IconButton>
-              <button
+              {/* Dark Mode Toggle in Mobile */}
+              {/* <button
                 onClick={toggleDarkMode}
                 className={`p-1 rounded-full ${
                   darkMode ? "bg-purple-700" : "bg-purple-700"
                 } text-white`}
               >
-                {darkMode ? <SunIcon size={16} /> : <MoonIcon size={16} />}
-              </button>
+                {darkMode ? <lucideReact.SunIcon size={16} /> : <lucideReact.MoonIcon size={16} />}
+              </button> */}
+              
+              {/* Mobile Language Selector with hover */}
+              <div className="relative">
+                <div 
+                  className="cursor-pointer"
+                  onMouseEnter={() => setShowLanguages(true)}
+                  onMouseLeave={() => setShowLanguages(false)}
+                >
+                  <div className="h-6 w-6 rounded-full overflow-hidden border-2 border-gray-300 flex items-center justify-center">
+                    <img 
+                      src={currentLanguage.flag} 
+                      alt={currentLanguage.fullName}
+                      className="h-full w-full object-cover" 
+                    />
+                  </div>
+                  
+                  {/* Mobile Hover dropdown */}
+                  {showLanguages && (
+                    <div className={`absolute top-full right-0 mt-2 ${darkMode ? "bg-gray-700" : "bg-white"} shadow-lg rounded-lg p-2 z-20 w-40`}>
+                      <div className="grid grid-cols-2 gap-2">
+                        {languages.map((lang) => (
+                          <div 
+                            key={lang.code} 
+                            className={`flex items-center gap-2 p-1 rounded-md cursor-pointer ${lang.code === language ? (darkMode ? "bg-gray-600" : "bg-gray-100") : ""} hover:${darkMode ? "bg-gray-600" : "bg-gray-100"}`}
+                            onClick={() => handleLanguageChange(lang.code)}
+                          >
+                            <div className="h-5 w-5 rounded-full overflow-hidden flex items-center justify-center">
+                              <img 
+                                src={lang.flag} 
+                                alt={lang.fullName}
+                                className="h-full w-full object-cover" 
+                              />
+                            </div>
+                            <span className={`text-xs ${darkMode ? "text-gray-200" : "text-gray-800"}`}>
+                              {lang.name}
+                            </span>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+                </div>
+              </div>
             </div>
           </div>
           <div className="relative w-full">

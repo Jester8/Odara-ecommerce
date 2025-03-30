@@ -36,37 +36,21 @@ const AuthCard = (props) => {
 
   return (
     <div
-      className={`bg-white shadow-lg rounded-none p-4 w-60 sm:w-72 ${className}`}
+      className={`bg-white shadow-md rounded-none p-4 w-40 sm:w-52 ${className}`}
       style={style}
     >
-      {/* Sign In and Register Buttons */}
-      <div className="flex flex-col items-center gap-2 mb-4">
-        <Link href="/signin">
-        <button
-                type="submit"
-                className="w-[250px] bg-purple-900 text-white py-2 px-4 rounded-full hover:bg-purple-800 transition duration-200"
-              >
-                Sign in
-              </button>
-        </Link>
-        <button
-                type="submit"
-                className="w-[250px] bg-orange-600 text-white py-2 px-4 rounded-full hover:bg-orange-600 transition duration-200"
-                onClick={() => router.push("/signup")}
-              >
-                Sign up
-              </button>
-      </div>
+     
+ 
   
 
       {/* Menu Items */}
       {data.map((item, index) => (
         <React.Fragment key={index}>
           <div
-            className="flex items-center gap-4 py-2 px-3 rounded-lg cursor-pointer hover:bg-gray-100"
+            className="flex items-center gap-4 py-2 px-1 rounded-lg cursor-pointer hover:bg-gray-100"
           >
             <div className="text-gray-700">{item.icon}</div>
-            <div className="text-sm font-medium text-gray-800 hover:text-emerald-500">
+            <div className="text-sm font-medium text-gray-800 hover:text-purple-500">
               {item.label}
             </div>
           </div>

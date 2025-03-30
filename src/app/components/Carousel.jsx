@@ -26,6 +26,7 @@ import {
   ImageNotSupported as ImagePlaceholderIcon
 } from "@mui/icons-material";
 import { useDarkMode } from "../components/context/Darkmode";
+import ImgCard from "./ImgCard";
 
 const Carousel = ({ products = [] }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -59,12 +60,12 @@ const Carousel = ({ products = [] }) => {
     <div className="relative w-full h-[400px] overflow-hidden  hidden lg:flex">
 
       {/* Sidebar Section */}
-      <div className="hidden md:block w-64 bg-transparent z-10 h-full mr-4">
+      <div className="hidden md:block w-[290px] bg-transparent z-10 h-full mr-4">
         <Card className="w-full h-full">
-          <CardContent className="p-0">
-            <Typography variant="subtitle1" className="mb-2 font-bold text-sm px-4 pt-4">
+          <CardContent className="p-0 ">
+            <h3 className="mb-2 text-md px-4 pt-4 text-start font-bold">
               Categories
-            </Typography>
+            </h3>
             <List 
               dense 
               className="max-h-[calc(100%-50px)] overflow-y-auto scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-gray-100"
@@ -76,7 +77,7 @@ const Carousel = ({ products = [] }) => {
                     primary={category.name} 
                     primaryTypographyProps={{ 
                       variant: 'body2', 
-                      className: 'whitespace-nowrap overflow-hidden text-ellipsis font-semibold'
+                      className: 'whitespace-nowrap overflow-hidden text-ellipsis font-normal'
                     }}
                     className="ml-[-20px]"  
                   />
@@ -86,49 +87,7 @@ const Carousel = ({ products = [] }) => {
           </CardContent>
         </Card>
       </div>
-
-      {/* Carousel Section */}
-      <div className="relative flex-grow h-full w-full md:w-auto">
-        {products.map((product, index) => (
-          <div
-            key={product.id}
-            className={`absolute top-0 left-0 w-full h-full transition-opacity duration-500 ${
-              index === currentIndex ? "opacity-100" : "opacity-0"
-            }`}
-          >
-            <div className="relative w-full h-full">
-              {!imageLoaded && (
-                <div className="absolute inset-0 bg-gray-200 flex items-center justify-center">
-                  <ImagePlaceholderIcon 
-                    className="text-gray-500" 
-                    style={{ fontSize: '4rem' }} 
-                  />
-                </div>
-              )}
-              <Image
-                src={product.imageUrl}
-                alt={product.name}
-                fill
-                priority={index === 0}
-                className={`object-cover ${imageLoaded ? 'opacity-100' : 'opacity-0'}`}
-                onLoadingComplete={() => setImageLoaded(true)}
-              />
-            </div>
-          </div>
-        ))}
-
-        {/* Indicator Dots */}
-        <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
-          {products.map((_, index) => (
-            <div
-              key={index}
-              className={`w-2 h-2 rounded-full ${
-                index === currentIndex ? "bg-red-600" : "bg-gray-400"
-              }`}
-            />
-          ))}
-        </div>
-      </div>
+    <ImgCard/>
     </div>
   );
 };
